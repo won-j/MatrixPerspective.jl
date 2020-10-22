@@ -1,0 +1,11 @@
+.DS_Store
+/dev/
+*.swp
+examples/rslts
+*.mem
+core.*
+Manifest.toml
+*/Manifest.toml
+docs/build/
+*.txt
+*.jl~
