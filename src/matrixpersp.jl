@@ -1,7 +1,6 @@
 using LinearAlgebra
 using IterativeSolvers
-
-include("rank1eig.jl")
+using Convex, Mosek, MosekTools
 
 """
 	rank1update!(M::Matrix{T}, A::Matrix{T}, v::Vector{T}, alph::T) 
@@ -56,13 +55,12 @@ end
 							S::AbstractVector{T},
 						) where T <: AbstractFloat
 
-This function first computes the rank-1 update of symmetric matrix `G`:
+First compute the rank-1 update of symmetric matrix `G`:
 ```
 	M := G + y * w * w'
 ```
-when the eigenvalue decomposition `(valG, vecG)` of `G` is given. 
-
-It then computes the positive semidefinite part of matrix `M` and overwrite. Finally it returns the eigenvalues and the last elements of the eigenvectors of `M` 
+when the eigenvalue decomposition `(valG, vecG)` of `G` is given,
+and then compute the positive semidefinite part of matrix `M` and overwrite. Finally return the eigenvalues and the last elements of the eigenvectors of `M` 
 
 # Input
 - `valG::AbstractVector{T}`: eigenvalues of `G`. Length `n - 1`.
@@ -173,7 +171,7 @@ end
 					 log::Bool = false
 					) where T <: AbstractFloat
 
-This function solves the optimization problem
+Solve the optimization problem
 ```
         min_X (1/2)|| G - X ||_F^2
         s.t.  e'Xe = 1, X >= 0
@@ -345,7 +343,7 @@ end
 					 log::Bool = false
 					) where T <: AbstractFloat
 
-This function solves the optimization problem
+Solve the optimization problem
 ```
         min_X (1/2)|| G - X ||_F^2
         s.t.  e'Xe = 1, X >= 0
@@ -426,7 +424,7 @@ end
 			 log::Bool = false
 			) where T <: AbstractFloat
 
-This function solves the optimization problem
+Solve the optimization problem
 ```
         min_X (1/2)|| G - X ||_F^2
         s.t.  e'Xe = 1, X >= 0
@@ -544,7 +542,7 @@ end
 		   maxiter::Integer=100
 		  ) where T <: AbstractFloat
 
-This function solves the optimization problem
+Solve the optimization problem
 ```
         min_X (1/2)|| G - X ||_F^2
         s.t.  e'Xe = 1, X >= 0
@@ -607,6 +605,36 @@ function bisect(G::Matrix{T};
 end
 
 """
+	mosek_ls_cov_adj(G::Matrix{T}) where T <: AbstractFloat
+
+Solve
+```
+        min_X (1/2)|| G - X ||_F^2
+        s.t.  e'Xe = 1, X >= 0
+```
+using Convex.jl and MOSEK. 
+
+# Input
+- `G::Matrix{T}`: input symmetric matrix
+
+# Output
+- `problem.optval::T`: optimal objective value
+- `X.value::Matrix{T}: optimal variable
+- `problem.constraints`: constraints fed to Convex.jl
+"""
+function mosek_ls_cov_adj(G::Matrix{T}) where T <: AbstractFloat
+	X = Variable(size(G))
+	problem = minimize(0.5 * sumsquares(vec(G-X)) )
+	constraint = (X in :SDP)
+	problem.constraints += constraint
+	problem.constraints += X[end, end] == one(T)
+	solve!(problem, Mosek.Optimizer(LOG=0))
+
+	problem.optval, X.value, problem.constraints
+end
+
+
+"""
 	prox_matrixperspective!(Omega::Matrix{T},
 							eta::Vector{T},
 							X::Matrix{T}, 
@@ -632,7 +660,7 @@ end
 						 	maxiter::Integer=50
 						) where T <: AbstractFloat
 
-This function computes the proximity operator `(Omega, eta)` of the matrix perspective function for input `(X, y)`.
+Compute the proximity operator `(Omega, eta)` of the matrix perspective function for input `(X, y)`.
 
 # Input
 - `Omega::Matrix{T}`: output matrix
@@ -718,7 +746,7 @@ end
 						   maxiter::Integer=100
 						  ) where T <: Float64
 
-This function computes the proximity operator of the matrix perspective function for input `(X, y)`.
+Compute the proximity operator of the matrix perspective function for input `(X, y)`.
 
 # Input
 - `X::Matrix{T}`: input matrix
