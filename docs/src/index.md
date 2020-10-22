@@ -15,25 +15,6 @@ versioninfo()
       LLVM: libLLVM-9.0.1 (ORCJIT, skylake)
 
 
-
-```julia
-import Pkg
-Pkg.activate("..")
-Pkg.status()
-```
-
-    [36m[1mProject [22m[39mMatrixPerspective v0.1.0
-    [32m[1mStatus[22m[39m `~/Dropbox/Projects/CvxGMVQ/code-v1.5/MatrixPerspective/Project.toml`
-     [90m [f65535da] [39m[37mConvex v0.13.7[39m
-     [90m [a93c6f00] [39m[37mDataFrames v0.21.8[39m
-     [90m [42fd0dbc] [39m[37mIterativeSolvers v0.8.4[39m
-     [90m [6405355b] [39m[37mMosek v1.1.3[39m
-     [90m [1ec41992] [39m[37mMosekTools v0.9.4[39m
-     [90m [37e2e46d] [39m[37mLinearAlgebra[39m
-     [90m [9a3f8284] [39m[37mRandom[39m
-     [90m [10745b16] [39m[37mStatistics[39m
-
-
 ## Timing
 
 The following code compares the three methods, interior point method (by using MOSEK, for $p < 100$), bisection, and semismooth Newton, for finding the unique root of the semismooth function
