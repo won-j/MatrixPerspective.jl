@@ -12,7 +12,7 @@ git:
   depth: 99999999
 
 install:
-  - if [[ "$TRAVIS:OS:NAME" == "windows" ]]; then "powershell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'"
+  - if [[ "$TRAVIS:OS:NAME" == "windows" ]]; then "powershell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'"; fi
 
 after_script:
   - julia -e 'using Pkg, MatrixPerspective; cd(joinpath(dirname(pathof(MatrixPerspective)), "..")); Pkg.add("Coverage"); using Coverage; Codecov.submit(process_folder()); Coveralls.submit(process_folder())'
