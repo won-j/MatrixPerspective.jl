@@ -12,7 +12,7 @@ git:
   depth: 99999999
 
 install:
-  - if [[ "$TRAVIS:OS:NAME" == "windows" ]]; then PowerShell -Command 'Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass'; fi
+  - if [[ "$TRAVIS:OS:NAME" == "windows" ]]; then PowerShell -Command 'Set-ExecutionPolicy -Scope LocalMachine -ExecutionPolicy Bypass'; fi
 
 after_script:
   - julia -e 'using Pkg, MatrixPerspective; cd(joinpath(dirname(pathof(MatrixPerspective)), "..")); Pkg.add("Coverage"); using Coverage; Codecov.submit(process_folder()); Coveralls.submit(process_folder())'
