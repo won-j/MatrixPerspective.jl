@@ -21,5 +21,5 @@ y = [1.0; 2; 0]
 Ω, η = prox_matrixperspective(Matrix(X), y, 1.0) # prox operator
 # desired solution
 @show Ω, η 
-@test isapprox(Ω, zeros(size(X)), atol=1e-6) && isapprox(η, zeros(size(y)) atol=1e-6)
+@test isapprox(Ω, zeros(size(X)), atol=1e-6) && isapprox(η, zeros(size(y)), atol=1e-6)
 end
