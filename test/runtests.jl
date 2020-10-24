@@ -11,7 +11,7 @@ y = [1.0; 2; 0]
        0.2111491993644736      0.6659884405376072      0.0
        0.0                     0.0                     0.0 ]       
 η0 = [0.6340926854346827; 0.845886972140417; 0.0]
-@test Ω ≈ Ω0 && η ≈ η0
+@test isapprox(Ω, Ω0, atol=1e-6) && isapprox(η, η0, atol=1e-6)
 end
 
 @testset "interior point" begin
@@ -21,5 +21,5 @@ y = [1.0; 2; 0]
 Ω, η = prox_matrixperspective(Matrix(X), y, 1.0) # prox operator
 # desired solution
 @show Ω, η 
-@test Ω ≈ zeros(size(X)) && η ≈ zeros(size(y))
+@test isapprox(Ω, zeros(size(X)), atol=1e-6) && isapprox(η, zeros(size(y)) atol=1e-6)
 end
