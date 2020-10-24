@@ -18,24 +18,24 @@ versioninfo()
 ## Timing
 
 The following code compares the three methods, interior point method (by using MOSEK, for $p < 100$), bisection, and semismooth Newton, for finding the unique root of the semismooth function
-$$
-    f(\mu) = 1 - \mathbf{e}^T(\bar{\mathbf{X}} - \mu \mathbf{e}\mathbf{e}^T)_{+}\mathbf{e}
-$$
+
+$f(\mu) = 1 - \mathbf{e}^T(\bar{\mathbf{X}} - \mu \mathbf{e}\mathbf{e}^T)_{+}\mathbf{e}$
+
 where $\mathbf{e}=(0, \dotsc, 0, 1)^T$ and
-$$
-    \bar{\mathbf{X}} = \begin{bmatrix} -\mathbf{X} & \frac{1}{\sqrt{2}}\mathbf{y} \\
-                        \frac{1}{\sqrt{2}}\mathbf{y}^T & 1 \end{bmatrix}
-$$
+
+$\bar{\mathbf{X}} = \begin{bmatrix} -\mathbf{X} & \frac{1}{\sqrt{2}}\mathbf{y} \\
+                        \frac{1}{\sqrt{2}}\mathbf{y}^T & 1 \end{bmatrix}$
+                        
 for given input $(\mathbf{X}, \mathbf{y})$. From this root the prox operator
-$$
-    \mathrm{prox}_{\phi}(\mathbf{X}, \mathbf{y}),
+
+$\mathrm{prox}_{\phi}(\mathbf{X}, \mathbf{y}),
     \quad
     \phi(\boldsymbol{\Omega}, \boldsymbol{\eta}) = \begin{cases}
     \frac{1}{2}\boldsymbol{\eta}^T\boldsymbol{\Omega}^{\dagger}\boldsymbol{\eta}, &
     \boldsymbol{\Omega} \succeq \mathbf{0},~\boldsymbol{\eta} \in \mathcal{R}(\boldsymbol{\Omega}) \\
     \infty, & \text{otherwise}
-    \end{cases}
-$$
+    \end{cases}$
+
 can be computed in a closed form.
 
 The first table reports the mean of the performance measures, and the second table contains the standard deviation. The $p=5$ case (especially for MOSEK) should be ignored since there is an overhead of JIT compilation of the code.
@@ -195,7 +195,7 @@ include("timing.jl")
     p = 2000
     24×6 DataFrame
     │ Row │ p     │ Method    │ Iters_mean │ Secs_mean   │ KKT_mean    │ Obj_mean  │
-    │     │ [90mInt64[39m │ [90mString[39m    │ [90mFloat64[39m    │ [90mFloat64[39m     │ [90mFloat64[39m     │ [90mFloat64[39m   │
+    │     │ Int64 │ String    │ Float64    │ Float64     │ Float64     │ Float64   │
     ├─────┼───────┼───────────┼────────────┼─────────────┼─────────────┼───────────┤
     │ 1   │ 5     │ MOSEK     │ NaN        │ 2.49323     │ 1.21816e-5  │ 6.53939   │
     │ 2   │ 5     │ Bisection │ 28.4       │ 0.157635    │ 5.97528e-9  │ 6.53939   │
@@ -223,7 +223,7 @@ include("timing.jl")
     │ 24  │ 2000  │ Newton    │ 8.0        │ 4.32247     │ 2.88162e-9  │ 1.00103e6 │
     24×6 DataFrame
     │ Row │ p     │ Method    │ Iters_std │ Secs_std    │ KKT_std     │ Obj_std │
-    │     │ [90mInt64[39m │ [90mString[39m    │ [90mFloat64[39m   │ [90mFloat64[39m     │ [90mFloat64[39m     │ [90mFloat64[39m │
+    │     │ Int64 │ String    │ Float64   │ Float64     │ Float64     │ Float64 │
     ├─────┼───────┼───────────┼───────────┼─────────────┼─────────────┼─────────┤
     │ 1   │ 5     │ MOSEK     │ NaN       │ 7.8583      │ 1.28047e-5  │ 3.22705 │
     │ 2   │ 5     │ Bisection │ 0.966092  │ 0.498075    │ 3.69496e-9  │ 3.22705 │
