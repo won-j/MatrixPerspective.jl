@@ -20,5 +20,6 @@ y = [1.0; 2; 0]
 @show maximum(eigvals(X + 0.5 * y * y'))  # `X + 0.5 * y * y'` is indefinite
 Ω, η = prox_matrixperspective(Matrix(X), y, 1.0) # prox operator
 # desired solution
+@show Ω, η 
 @test Ω ≈ zeros(size(X)) && η ≈ zeros(size(y))
 end
