@@ -2,7 +2,7 @@
 
 | **Documentation** | **Build Status** |
 |-------------------|------------------|
-| [![Documentation](https://img.shields.io/badge/docs-dev-blue.svg)](https://won-j.github.io/MatrixPerspective.jl/dev) | [![Build Status](https://travis-ci.org/won-j/MatrixPerspective.jl.svg?branch=master)](https://travis-ci.org/won-j/MatrixPerspective.jl)  | 
+| [![Documentation](https://img.shields.io/badge/docs-dev-blue.svg)](https://won-j.github.io/MatrixPerspective.jl/dev) | [![Build Status](https://travis-ci.org/won-j/MatrixPerspective.jl.svg?branch=master)](https://travis-ci.com/github/won-j/MatrixPerspective.jl)  | 
 
 
 
