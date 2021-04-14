@@ -8,7 +8,7 @@
 
 This Julia package implements the algorithms for the proximity operator of the matrix perspective function discussed in the following paper.
 
-* Joong-Ho Won (2020). [Proximity Operator of the Matrix Perspective Function and its Applications]((https://papers.nips.cc/paper/2020/hash/45f31d16b1058d586fc3be7207b58053-Abstract.html)). *34th Conference on Neural Information Processing Systems (NeurIPS 2020), Virtual Conference.* 
+* Joong-Ho Won (2020). [Proximity Operator of the Matrix Perspective Function and its Applications](https://papers.nips.cc/paper/2020/hash/45f31d16b1058d586fc3be7207b58053-Abstract.html). *34th Conference on Neural Information Processing Systems (NeurIPS 2020), Virtual Conference.* 
 
 The implemented algorithms for solving the dual of the proximity operator problem are
 1. Semismooth Newton method
